@@ -1,13 +1,25 @@
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 
 const stats = [
-  { value: "5+", label: "Years Experience" },
-  { value: "40+", label: "Projects Completed" },
-  { value: "15+", label: "Happy Clients" },
-  { value: "3", label: "Design Awards" },
+  { value: "SaaS", label: "Production Platforms" },
+  { value: "AI/ML", label: "Intelligent Systems" },
+  { value: "Cloud", label: "Scalable Backends" },
+  { value: "Full-Stack", label: "End-to-End Delivery" },
 ];
 
 export const AboutSection = () => {
+  const { data } = useQuery<{ profileImage?: string }>({
+    queryKey: ["site-settings"],
+    queryFn: async () => {
+      const response = await fetch("/api/site-settings");
+      if (!response.ok) throw new Error("Failed to load site settings");
+      return response.json();
+    },
+  });
+
+  const profileImage = data?.profileImage || "/profile.jpg";
+
   return (
     <section id="about" className="py-24 md:py-32 section-padding bg-muted/20">
       <div className="container-wide">
@@ -22,8 +34,8 @@ export const AboutSection = () => {
           >
             <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-muted">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80"
-                alt="John Doe - Design Engineer"
+                src={profileImage}
+                alt="Joshua Vaz - Software Engineer"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -43,24 +55,18 @@ export const AboutSection = () => {
               About Me
             </p>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Bridging design & development
+              Building products that ship and scale
             </h2>
             
             <div className="space-y-4 font-body text-foreground/80 leading-relaxed mb-8">
               <p>
-                Hi, I'm John Doe. I'm a design engineer based in San Francisco with 5+ years 
-                of experience building digital products that people love to use.
+                Software Engineer with experience building production-grade SaaS platforms,
+                scalable backends, and AI-powered applications. Strong track record of shipping
+                end-to-end products, driving user adoption, and optimizing system performance.
               </p>
               <p>
-                I started my career in frontend development, but quickly realized that great 
-                products require both design excellence and technical execution. Now, I specialize 
-                in bridging that gap — creating products that are beautiful to use and elegant 
-                under the hood.
-              </p>
-              <p>
-                I believe the best digital experiences are intuitive, performant, and solve real 
-                problems for real people. Every project I take on, I treat as an opportunity to 
-                make something meaningful.
+                Proven ability to deliver impact in fast-paced startup environments with ownership
+                across architecture, backend systems, and product iterations informed by analytics.
               </p>
             </div>
 

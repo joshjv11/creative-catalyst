@@ -32,9 +32,9 @@ export const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] mb-6"
           >
-            <span className="text-foreground">John Doe</span>
+            <span className="text-foreground">Joshua Vaz</span>
             <br />
-            <span className="text-gradient">Design Engineer</span>
+            <span className="text-gradient">Machine Learning Engineer & Full Stack Developer</span>
           </motion.h1>
 
           {/* Subheadline */}

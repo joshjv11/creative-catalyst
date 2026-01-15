@@ -1,11 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Sparkles, Lock } from "lucide-react";
-import { useGamification } from "@/hooks/useGamification";
+import { ArrowDown, Sparkles } from "lucide-react";
 
 export const EnhancedHeroSection = () => {
-  const { scrollProgress, achievements } = useGamification();
-  const unlockedCount = achievements.filter(a => a.unlocked).length;
-  
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
@@ -50,35 +46,6 @@ export const EnhancedHeroSection = () => {
         className="relative z-10 section-padding container-wide"
       >
         <div className="max-w-5xl mx-auto text-center">
-          {/* Achievement hint badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-muted/30 border border-border/40 backdrop-blur-sm mb-6"
-          >
-            <div className="flex -space-x-1">
-              {achievements.slice(0, 3).map((a, i) => (
-                <motion.span
-                  key={a.id}
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs border ${
-                    a.unlocked 
-                      ? 'bg-primary/20 border-primary/40' 
-                      : 'bg-muted/50 border-border/50'
-                  }`}
-                >
-                  {a.unlocked ? a.icon : '?'}
-                </motion.span>
-              ))}
-            </div>
-            <span className="text-xs font-body text-muted-foreground">
-              {unlockedCount} of {achievements.length} badges unlocked
-            </span>
-          </motion.div>
-
           {/* Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -107,7 +74,7 @@ export const EnhancedHeroSection = () => {
               className="text-foreground inline-block"
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
             >
-              John Doe
+              Joshua Vaz
             </motion.span>
             <br />
             <motion.span 
@@ -122,7 +89,7 @@ export const EnhancedHeroSection = () => {
                 WebkitTextFillColor: 'transparent',
               }}
             >
-              Design Engineer
+              Software Engineer | Full-Stack & AI
             </motion.span>
           </motion.h1>
 
@@ -133,31 +100,44 @@ export const EnhancedHeroSection = () => {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed"
           >
-            I design and build digital products that solve real problems and drive business growth. 
-            Obsessed with the intersection of design, code, and user experience.
+            Software engineer with experience building production-grade SaaS platforms,
+            scalable backends, and AI-powered applications. Proven ability to ship end-to-end
+            products, drive user adoption, and optimize system performance.
           </motion.p>
 
-          {/* Gamification hint */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="flex items-center justify-center gap-6 mb-12 text-sm font-body text-muted-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex flex-wrap items-center justify-center gap-3 text-sm font-body text-muted-foreground mb-10"
           >
-            <div className="flex items-center gap-2">
-              <Lock className="w-4 h-4" />
-              <span>3 projects to unlock</span>
-            </div>
-            <div className="w-px h-4 bg-border" />
-            <div className="flex items-center gap-2">
-              <span>🏆</span>
-              <span>Achievements to earn</span>
-            </div>
-            <div className="w-px h-4 bg-border" />
-            <div className="flex items-center gap-2">
-              <span>🥚</span>
-              <span>Easter eggs hidden</span>
-            </div>
+            <span>Mumbai, India</span>
+            <span className="text-muted-foreground/40">•</span>
+            <a href="tel:+918828447880" className="hover:text-foreground transition-colors">
+              +91 8828447880
+            </a>
+            <span className="text-muted-foreground/40">•</span>
+            <a href="mailto:joshuavaz55@gmail.com" className="hover:text-foreground transition-colors">
+              joshuavaz55@gmail.com
+            </a>
+            <span className="text-muted-foreground/40">•</span>
+            <a
+              href="https://linkedin.com/in/joshua-vaz-53b7ba287"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              LinkedIn
+            </a>
+            <span className="text-muted-foreground/40">•</span>
+            <a
+              href="https://github.com/joshuavaz55"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              GitHub
+            </a>
           </motion.div>
 
           {/* CTA Buttons */}
@@ -192,30 +172,7 @@ export const EnhancedHeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-xs font-body text-muted-foreground tracking-widest uppercase">
-              Scroll to unlock
-            </span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center pt-2"
-            >
-              <motion.div 
-                className="w-1.5 h-3 bg-primary rounded-full"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-            </motion.div>
-          </div>
-        </motion.div>
+ 
       </motion.div>
 
       {/* Bottom gradient fade */}

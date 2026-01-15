@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { Mail, ArrowUpRight, Linkedin, Github, Twitter } from "lucide-react";
+import { Mail, ArrowUpRight, Linkedin, Github } from "lucide-react";
 
 const socialLinks = [
-  { name: "LinkedIn", icon: Linkedin, href: "#" },
-  { name: "GitHub", icon: Github, href: "#" },
-  { name: "Twitter", icon: Twitter, href: "#" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com/in/joshua-vaz-53b7ba287" },
+  { name: "GitHub", icon: Github, href: "https://github.com/joshuavaz55" },
 ];
 
 export const ContactSection = () => {
@@ -47,8 +46,8 @@ export const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-body text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Have a project in mind or just want to chat about design and technology? 
-            I'm always excited to hear about new opportunities and interesting challenges.
+            Have a project in mind or want to discuss SaaS, AI, or full-stack development?
+            I'm always open to impactful collaborations.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -60,11 +59,11 @@ export const ContactSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
           >
             <a
-              href="mailto:hello@johndoe.com"
+              href="mailto:joshuavaz55@gmail.com"
               className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-body font-medium rounded-full hover:bg-primary/90 transition-all glow-accent"
             >
               <Mail className="w-5 h-5" />
-              hello@johndoe.com
+              joshuavaz55@gmail.com
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </a>
           </motion.div>

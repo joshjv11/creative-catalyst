@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Analytics data
+server/data/analytics.json
+
+server/data/uploads/

@@ -5,30 +5,26 @@ import { AboutSection } from "@/components/AboutSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
-import { ProgressBar } from "@/components/ProgressBar";
-import { AchievementToast } from "@/components/AchievementToast";
-import { ScrollProgressTracker } from "@/components/ScrollProgressTracker";
-import { KonamiCodeListener } from "@/components/KonamiCodeListener";
-import { DevModeOverlay } from "@/components/DevModeOverlay";
 import { ParallaxShapes } from "@/components/ParallaxEffects";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
+import { ExperienceSection } from "@/components/ExperienceSection";
+import { SkillsEducationSection } from "@/components/SkillsEducationSection";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background relative">
-      {/* Gamification Layer */}
-      <ScrollProgressTracker />
-      <ProgressBar />
-      <AchievementToast />
-      <KonamiCodeListener />
-      <DevModeOverlay />
-      
+      {/* Analytics Tracking */}
+      <AnalyticsTracker />
+
       {/* Parallax Background */}
       <ParallaxShapes />
-      
+
       {/* Main Content */}
       <Navigation />
       <EnhancedHeroSection />
       <EnhancedPortfolioSection />
+      <ExperienceSection />
+      <SkillsEducationSection />
       <AboutSection />
       <ProcessSection />
       <ContactSection />

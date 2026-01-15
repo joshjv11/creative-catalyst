@@ -4,6 +4,8 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Portfolio", href: "#portfolio" },
+  { name: "Experience", href: "#experience" },
+  { name: "Skills", href: "#skills" },
   { name: "About", href: "#about" },
   { name: "Process", href: "#process" },
   { name: "Contact", href: "#contact" },
@@ -12,6 +14,19 @@ const navLinks = [
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleNavClick = (href: string) => {
+    if (!href.startsWith('#')) return;
+    const id = href.slice(1);
+    setIsMobileMenuOpen(false);
+    requestAnimationFrame(() => {
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.replaceState(null, '', href);
+      }
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +51,7 @@ export const Navigation = () => {
         <div className="container-wide flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="font-display text-xl md:text-2xl font-bold text-foreground">
-            JD<span className="text-primary">.</span>
+            JV<span className="text-primary">.</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -45,6 +60,12 @@ export const Navigation = () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={(e) => {
+                  if (link.href.startsWith('#')) {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }
+                }}
                 className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors link-underline"
               >
                 {link.name}
@@ -53,12 +74,16 @@ export const Navigation = () => {
           </div>
 
           {/* CTA Button */}
-          <a
-            href="#contact"
-            className="hidden md:inline-flex px-5 py-2.5 bg-primary text-primary-foreground font-body text-sm font-medium rounded-full hover:bg-primary/90 transition-colors"
-          >
-            Let's Talk
-          </a>
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('#contact');
+              }}
+              className="hidden md:inline-flex px-5 py-2.5 bg-primary text-primary-foreground font-body text-sm font-medium rounded-full hover:bg-primary/90 transition-colors"
+            >
+              Let's Talk
+            </a>
 
           {/* Mobile Menu Button */}
           <button
@@ -84,7 +109,14 @@ export const Navigation = () => {
                   <a
                     key={link.name}
                     href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      if (link.href.startsWith('#')) {
+                        e.preventDefault();
+                        handleNavClick(link.href);
+                      } else {
+                        setIsMobileMenuOpen(false);
+                      }
+                    }}
                     className="font-body text-lg text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {link.name}
@@ -92,7 +124,10 @@ export const Navigation = () => {
                 ))}
                 <a
                   href="#contact"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick('#contact');
+                  }}
                   className="inline-flex w-fit px-5 py-2.5 bg-primary text-primary-foreground font-body text-sm font-medium rounded-full"
                 >
                   Let's Talk

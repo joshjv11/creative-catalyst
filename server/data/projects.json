@@ -1,0 +1,102 @@
+[
+  {
+    "id": "invoiceflow",
+    "title": "InvoiceFlow",
+    "description": "Production SaaS invoicing platform with secure authentication, multi-tenant architecture, and analytics-driven iterations. Built end-to-end and deployed for real users.",
+    "image": "",
+    "websiteLink": "https://invoiceflow.dev/",
+    "techStack": [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "AWS"
+    ],
+    "order": 0
+  },
+  {
+    "id": "sleepease",
+    "title": "SleepEase",
+    "description": "Production-ready wellness app for better sleep with emotion-based audio recommendations, streak tracking, and Razorpay subscriptions. Includes curated audio categories, WhatsApp reminders, and an admin dashboard for content management.",
+    "image": "",
+    "websiteLink": "https://sleepease.vercel.app/",
+    "techStack": [
+      "React",
+      "Supabase",
+      "Express.js",
+      "Razorpay",
+      "WhatsApp API"
+    ],
+    "order": 1
+  },
+  {
+    "id": "eldercare-companion",
+    "title": "ElderCare Companion",
+    "description": "Full-stack healthcare reminder system with automated WhatsApp reminders, real-time dashboard, multi-language support, OTP onboarding, and daily reports.",
+    "image": "",
+    "websiteLink": "https://eldercare-companion-46k8.vercel.app/",
+    "techStack": [
+      "React",
+      "Supabase",
+      "Tailwind CSS",
+      "WhatsApp Business API",
+      "PostgreSQL"
+    ],
+    "order": 2
+  },
+  {
+    "id": "aura-voice",
+    "title": "Aura Voice Engine",
+    "description": "Real-time AI voice conversation system with sub-second latency, streaming responses, Hinglish support, and emotional intelligence.",
+    "image": "",
+    "websiteLink": "",
+    "techStack": [
+      "React",
+      "TypeScript",
+      "Supabase",
+      "WebRTC",
+      "Gemini API"
+    ],
+    "order": 3
+  },
+  {
+    "id": "prompt-to-power",
+    "title": "Prompt to Power",
+    "description": "Prompt-driven product experience that helps users turn ideas into structured outputs with a fast, clean interface and responsive UX.",
+    "image": "",
+    "websiteLink": "https://prompt-to-power-dun.vercel.app/",
+    "techStack": [
+      "React",
+      "Vite",
+      "Tailwind CSS"
+    ],
+    "order": 4
+  },
+  {
+    "id": "riya-ai",
+    "title": "Riya AI",
+    "description": "AI-powered platform delivering intelligent experiences with a modern, responsive UI and production-ready architecture.",
+    "image": "",
+    "websiteLink": "https://riya-ai.site/",
+    "techStack": [
+      "React",
+      "TypeScript",
+      "AI/ML",
+      "Node.js"
+    ],
+    "order": 5
+  },
+  {
+    "id": "speakup",
+    "title": "SpeakUp",
+    "description": "AI-assisted spoken English learning platform with pronunciation feedback and interactive practice flows.",
+    "image": "",
+    "websiteLink": "https://speakup-landing-1.emergent.host/",
+    "techStack": [
+      "React",
+      "OpenAI API",
+      "Speech Recognition"
+    ],
+    "order": 6
+  }
+]
