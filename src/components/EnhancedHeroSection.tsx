@@ -1,26 +1,25 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown, Sparkles, Code2, Cpu, Database, Zap } from "lucide-react";
 import { useRef, useEffect } from "react";
-import { TextReveal } from "./TextReveal";
 
 export const EnhancedHeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.9]);
-  const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 150]);
-  const heroBlur = useTransform(scrollYProgress, [0, 0.3], [0, 10]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.85]);
+  const heroY = useTransform(scrollYProgress, [0, 0.25], [0, 200]);
+  const heroRotateX = useTransform(scrollYProgress, [0, 0.25], [0, 15]);
 
   // Mouse parallax for 3D effect
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springConfig = { damping: 25, stiffness: 150 };
+  const springConfig = { damping: 20, stiffness: 150 };
   const mouseXSpring = useSpring(mouseX, springConfig);
   const mouseYSpring = useSpring(mouseY, springConfig);
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [5, -5]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-5, 5]);
-  const translateZ = useTransform(mouseXSpring, [-0.5, 0.5], [-20, 20]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [8, -8]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-8, 8]);
+  const translateZ = useTransform(mouseXSpring, [-0.5, 0.5], [-30, 30]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -36,123 +35,218 @@ export const EnhancedHeroSection = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
+  const floatingIcons = [
+    { Icon: Code2, top: "20%", left: "10%", delay: 0, size: 32 },
+    { Icon: Cpu, top: "30%", right: "12%", delay: 0.5, size: 28 },
+    { Icon: Database, top: "60%", left: "8%", delay: 1, size: 24 },
+    { Icon: Zap, top: "70%", right: "15%", delay: 1.5, size: 30 },
+  ];
+
   return (
     <section 
       ref={containerRef}
       id="hero" 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ perspective: 1200 }}
+      style={{ perspective: 1500 }}
     >
-      {/* Animated Background Layers */}
-      <div className="absolute inset-0">
-        {/* Base gradient with depth */}
-        <motion.div 
-          style={{ rotateX, rotateY }}
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(189_65%_30%_/_0.15)_0%,_transparent_60%)]" 
-        />
-        
-        {/* Dynamic Orb 1 - Large background */}
+      {/* 3D Background Layers */}
+      <div className="absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
+        {/* Deep background layer */}
         <motion.div 
           style={{ 
-            y: useTransform(scrollYProgress, [0, 1], [0, 300]),
-            x: useTransform(mouseXSpring, [-0.5, 0.5], [-30, 30]),
+            z: -200,
+            rotateX: useTransform(mouseYSpring, [-0.5, 0.5], [2, -2]),
+            rotateY: useTransform(mouseXSpring, [-0.5, 0.5], [-2, 2]),
           }}
-          className="absolute top-1/4 right-1/4 w-[600px] h-[600px]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(189_65%_30%_/_0.2)_0%,_transparent_50%)]" 
+        />
+        
+        {/* 3D Grid Floor Effect */}
+        <motion.div
+          style={{
+            rotateX: 75,
+            y: useTransform(scrollYProgress, [0, 0.5], ["60%", "80%"]),
+            z: -100,
+          }}
+          className="absolute inset-x-0 top-0 h-[200%] origin-center"
         >
-          <motion.div
-            animate={{ 
-              scale: [1, 1.1, 1],
-              opacity: [0.15, 0.25, 0.15],
+          <div 
+            className="w-full h-full opacity-20"
+            style={{
+              backgroundImage: `
+                linear-gradient(hsl(var(--primary)/0.3) 1px, transparent 1px),
+                linear-gradient(90deg, hsl(var(--primary)/0.3) 1px, transparent 1px)
+              `,
+              backgroundSize: '60px 60px',
+              maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
             }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="w-full h-full rounded-full bg-gradient-to-br from-primary/30 via-primary/10 to-transparent blur-[100px]"
           />
         </motion.div>
         
-        {/* Dynamic Orb 2 - Bottom */}
+        {/* Floating 3D Orbs */}
         <motion.div 
           style={{ 
             y: useTransform(scrollYProgress, [0, 1], [0, 400]),
-            x: useTransform(mouseXSpring, [-0.5, 0.5], [20, -20]),
+            x: useTransform(mouseXSpring, [-0.5, 0.5], [-60, 60]),
+            z: 50,
+            rotateY: useTransform(scrollYProgress, [0, 1], [0, 180]),
           }}
-          className="absolute bottom-1/4 left-1/4 w-96 h-96"
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px]"
+        >
+          <motion.div
+            animate={{ 
+              scale: [1, 1.15, 1],
+              rotateZ: [0, 360],
+            }}
+            transition={{ 
+              scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+              rotateZ: { duration: 20, repeat: Infinity, ease: "linear" },
+            }}
+            className="w-full h-full rounded-full"
+            style={{
+              background: 'radial-gradient(circle at 30% 30%, hsl(var(--primary)/0.4), hsl(var(--primary)/0.1) 50%, transparent 70%)',
+              boxShadow: '0 0 100px hsl(var(--primary)/0.2), inset 0 0 60px hsl(var(--primary)/0.1)',
+            }}
+          />
+        </motion.div>
+        
+        {/* Secondary 3D Orb */}
+        <motion.div 
+          style={{ 
+            y: useTransform(scrollYProgress, [0, 1], [0, 500]),
+            x: useTransform(mouseXSpring, [-0.5, 0.5], [40, -40]),
+            z: -30,
+          }}
+          className="absolute bottom-1/4 left-1/4 w-80 h-80"
         >
           <motion.div
             animate={{ 
               scale: [1, 1.2, 1],
-              opacity: [0.2, 0.35, 0.2],
+              rotateZ: [0, -360],
             }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="w-full h-full rounded-full bg-primary/20 blur-[80px]"
+            transition={{ 
+              scale: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 },
+              rotateZ: { duration: 25, repeat: Infinity, ease: "linear" },
+            }}
+            className="w-full h-full rounded-full"
+            style={{
+              background: 'radial-gradient(circle at 70% 70%, hsl(var(--primary)/0.35), hsl(var(--primary)/0.08) 50%, transparent 70%)',
+              boxShadow: '0 0 80px hsl(var(--primary)/0.15)',
+            }}
           />
         </motion.div>
-        
-        {/* Floating 3D Shapes */}
+
+        {/* Floating 3D Icons */}
+        {floatingIcons.map(({ Icon, top, left, right, delay, size }, index) => (
+          <motion.div
+            key={index}
+            style={{
+              top,
+              left,
+              right,
+              z: 100 + index * 20,
+            }}
+            animate={{
+              y: [-15, 15, -15],
+              rotateY: [0, 360],
+              rotateX: [-10, 10, -10],
+            }}
+            transition={{
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay },
+              rotateY: { duration: 8, repeat: Infinity, ease: "linear", delay },
+              rotateX: { duration: 5, repeat: Infinity, ease: "easeInOut", delay },
+            }}
+            className="absolute"
+          >
+            <div 
+              className="p-3 rounded-xl bg-primary/10 border border-primary/20 backdrop-blur-sm"
+              style={{
+                boxShadow: '0 10px 40px hsl(var(--primary)/0.2)',
+              }}
+            >
+              <Icon size={size} className="text-primary" />
+            </div>
+          </motion.div>
+        ))}
+
+        {/* 3D Geometric Shapes */}
+        <motion.div
+          style={{ 
+            y: useTransform(scrollYProgress, [0, 1], [0, 300]),
+            rotateZ: useTransform(scrollYProgress, [0, 1], [0, 180]),
+            rotateY: useTransform(mouseXSpring, [-0.5, 0.5], [-30, 30]),
+            z: 80,
+          }}
+          className="absolute top-[20%] right-[12%] w-20 h-20"
+        >
+          <div 
+            className="w-full h-full border-2 border-primary/30 rounded-xl bg-primary/5 backdrop-blur-sm"
+            style={{
+              transform: 'rotateX(20deg) rotateY(20deg)',
+              boxShadow: '0 20px 40px hsl(var(--primary)/0.15)',
+            }}
+          />
+        </motion.div>
+
         <motion.div
           style={{ 
             y: useTransform(scrollYProgress, [0, 1], [0, 200]),
-            rotateZ: useTransform(scrollYProgress, [0, 1], [0, 180]),
+            rotateZ: useTransform(scrollYProgress, [0, 1], [45, -135]),
+            z: 60,
           }}
-          className="absolute top-[20%] right-[15%] w-24 h-24"
+          className="absolute bottom-[35%] left-[8%] w-16 h-16"
         >
-          <div className="w-full h-full border border-primary/20 rounded-xl transform rotate-45 bg-primary/5 backdrop-blur-sm" />
+          <div 
+            className="w-full h-full border border-primary/20 bg-gradient-to-br from-primary/15 to-transparent"
+            style={{ transform: 'rotateX(30deg)' }}
+          />
         </motion.div>
         
-        <motion.div
-          style={{ 
-            y: useTransform(scrollYProgress, [0, 1], [0, 150]),
-            rotateZ: useTransform(scrollYProgress, [0, 1], [0, -90]),
-          }}
-          className="absolute bottom-[30%] left-[10%] w-16 h-16"
-        >
-          <div className="w-full h-full border border-primary/15 transform rotate-12 bg-gradient-to-br from-primary/10 to-transparent" />
-        </motion.div>
-        
-        {/* Grid Pattern with fade */}
-        <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border)/_0.04)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/_0.04)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black_70%,transparent_110%)]" />
-        
-        {/* Noise texture overlay */}
+        {/* Noise texture */}
         <div 
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.015]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           }}
         />
 
-        {/* Scanning line effect */}
+        {/* Horizontal scanning line */}
         <motion.div
-          animate={{ y: ["0%", "100%"] }}
+          animate={{ y: ["-100%", "200%"] }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
         />
       </div>
 
-      {/* Main Content with 3D parallax */}
+      {/* Main Content with 3D transforms */}
       <motion.div 
         style={{ 
           opacity: heroOpacity, 
           scale: heroScale, 
           y: heroY,
-          rotateX,
+          rotateX: heroRotateX,
           rotateY,
           translateZ,
-          filter: useTransform(heroBlur, (value) => `blur(${value}px)`),
           transformStyle: "preserve-3d",
         }}
         className="relative z-10 section-padding container-wide"
       >
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Status Badge */}
+        <motion.div 
+          className="max-w-5xl mx-auto text-center"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {/* Status Badge with 3D pop */}
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.1, type: "spring" }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-8 backdrop-blur-md"
+            initial={{ opacity: 0, y: 40, z: -50 }}
+            animate={{ opacity: 1, y: 0, z: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, type: "spring" }}
+            style={{ translateZ: 60 }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/25 mb-8 backdrop-blur-md"
           >
             <motion.div
               animate={{ 
-                scale: [1, 1.3, 1],
-                boxShadow: ["0 0 0 0 hsl(var(--primary)/0.4)", "0 0 0 8px hsl(var(--primary)/0)", "0 0 0 0 hsl(var(--primary)/0.4)"]
+                scale: [1, 1.4, 1],
+                boxShadow: ["0 0 0 0 hsl(var(--primary)/0.5)", "0 0 0 12px hsl(var(--primary)/0)", "0 0 0 0 hsl(var(--primary)/0.5)"]
               }}
               transition={{ duration: 2, repeat: Infinity }}
               className="w-2.5 h-2.5 rounded-full bg-primary"
@@ -161,38 +255,38 @@ export const EnhancedHeroSection = () => {
             <span className="text-sm font-body text-primary font-medium">Available for new projects</span>
           </motion.div>
 
-          {/* Main Headline with 3D text reveal */}
+          {/* Main Headline with 3D depth */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
             className="mb-6"
             style={{ transformStyle: "preserve-3d" }}
           >
             <motion.h1
-              initial={{ opacity: 0, y: 50, rotateX: 30 }}
+              initial={{ opacity: 0, y: 60, rotateX: 40 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ duration: 0.8, delay: 0.3, type: "spring", damping: 20 }}
+              transition={{ duration: 0.9, delay: 0.25, type: "spring", damping: 18 }}
+              style={{ translateZ: 80, transformStyle: "preserve-3d" }}
               className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95]"
-              style={{ transformStyle: "preserve-3d" }}
             >
               <motion.span 
                 className="text-foreground inline-block"
                 whileHover={{ 
-                  scale: 1.02, 
-                  textShadow: "0 0 40px hsl(var(--primary)/0.3)",
-                  transition: { duration: 0.2 } 
+                  scale: 1.03,
+                  textShadow: "0 0 60px hsl(var(--primary)/0.4)",
                 }}
+                transition={{ duration: 0.2 }}
               >
                 Joshua Vaz
               </motion.span>
             </motion.h1>
             
             <motion.div
-              initial={{ opacity: 0, y: 30, rotateX: 20 }}
+              initial={{ opacity: 0, y: 40, rotateX: 30 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, type: "spring", damping: 20 }}
-              className="mt-2"
+              transition={{ duration: 0.9, delay: 0.45, type: "spring", damping: 18 }}
+              style={{ translateZ: 60 }}
+              className="mt-3"
             >
               <span 
                 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold inline-block"
@@ -209,23 +303,24 @@ export const EnhancedHeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Subheadline with staggered reveal */}
+          {/* Subheadline */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+            style={{ translateZ: 40 }}
             className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed"
           >
             Software engineer with experience building production-grade SaaS platforms,
-            scalable backends, and AI-powered applications. Proven ability to ship end-to-end
-            products, drive user adoption, and optimize system performance.
+            scalable backends, and AI-powered applications.
           </motion.p>
 
-          {/* Contact info with hover effects */}
+          {/* Contact info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
+            style={{ translateZ: 30 }}
             className="flex flex-wrap items-center justify-center gap-3 text-sm font-body text-muted-foreground mb-10"
           >
             {[
@@ -242,7 +337,7 @@ export const EnhancedHeroSection = () => {
                     href={item.href}
                     target={item.href.startsWith('http') ? '_blank' : undefined}
                     rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
-                    whileHover={{ color: 'hsl(var(--foreground))', scale: 1.05 }}
+                    whileHover={{ color: 'hsl(var(--foreground))', scale: 1.05, z: 10 }}
                     className="transition-colors relative group"
                   >
                     {item.text}
@@ -255,31 +350,34 @@ export const EnhancedHeroSection = () => {
             ))}
           </motion.div>
 
-          {/* CTA Buttons with 3D effect */}
+          {/* CTA Buttons with 3D */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
+            transition={{ duration: 0.7, delay: 0.9 }}
+            style={{ translateZ: 50 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <motion.a
               href="#portfolio"
               whileHover={{ 
-                scale: 1.05, 
-                boxShadow: '0 0 60px hsl(189 65% 30% / 0.5)',
-                y: -2
+                scale: 1.08, 
+                boxShadow: '0 0 80px hsl(189 65% 30% / 0.6)',
+                y: -4,
+                z: 20,
               }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.96 }}
               className="group relative inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-body font-semibold rounded-full transition-all overflow-hidden"
+              style={{ transformStyle: "preserve-3d" }}
             >
               <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-primary-glow/0 via-primary-glow/30 to-primary-glow/0"
-                animate={{ x: ['-100%', '100%'] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-0 bg-gradient-to-r from-primary-glow/0 via-white/20 to-primary-glow/0"
+                animate={{ x: ['-100%', '200%'] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
               />
               <span className="relative z-10">Start Exploring</span>
               <motion.span
-                animate={{ y: [0, 4, 0] }}
+                animate={{ y: [0, 5, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="relative z-10"
               >
@@ -289,35 +387,37 @@ export const EnhancedHeroSection = () => {
             <motion.a
               href="#contact"
               whileHover={{ 
-                scale: 1.02, 
-                borderColor: 'hsl(var(--primary)/0.5)',
-                backgroundColor: 'hsl(var(--primary)/0.05)'
+                scale: 1.04, 
+                borderColor: 'hsl(var(--primary)/0.6)',
+                backgroundColor: 'hsl(var(--primary)/0.08)',
+                boxShadow: '0 0 40px hsl(var(--primary)/0.2)',
               }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.96 }}
               className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-foreground font-body font-medium rounded-full border border-border transition-all"
             >
               Get in Touch
             </motion.a>
           </motion.div>
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* 3D Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
+        transition={{ delay: 1.5 }}
+        style={{ translateZ: 40 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 12, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="flex flex-col items-center gap-2 text-muted-foreground"
         >
           <span className="text-xs font-body tracking-widest uppercase">Scroll</span>
-          <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center p-2">
+          <div className="w-7 h-11 border-2 border-muted-foreground/30 rounded-full flex justify-center p-2">
             <motion.div
-              animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+              animate={{ y: [0, 14, 0], opacity: [1, 0.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="w-1.5 h-1.5 bg-primary rounded-full"
             />
@@ -325,8 +425,8 @@ export const EnhancedHeroSection = () => {
         </motion.div>
       </motion.div>
 
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent" />
+      {/* Bottom gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/60 to-transparent" />
     </section>
   );
 };
