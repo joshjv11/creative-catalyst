@@ -5,7 +5,7 @@ import { AboutSection } from "@/components/AboutSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
-import { FloatingElements } from "@/components/FloatingElements";
+import { Floating3DShapes } from "@/components/Floating3DShapes";
 import { GlowingCursor } from "@/components/GlowingCursor";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { ExperienceSection } from "@/components/ExperienceSection";
@@ -13,15 +13,15 @@ import { SkillsEducationSection } from "@/components/SkillsEducationSection";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background relative overflow-x-hidden">
+    <main className="min-h-screen bg-background relative overflow-x-hidden" style={{ perspective: 2000 }}>
       {/* Analytics Tracking */}
       <AnalyticsTracker />
 
       {/* Custom Cursor */}
       <GlowingCursor />
 
-      {/* Floating 3D Elements */}
-      <FloatingElements />
+      {/* Floating 3D Shapes - Cubes, Pyramids, Spheres */}
+      <Floating3DShapes />
 
       {/* Main Content */}
       <Navigation />
