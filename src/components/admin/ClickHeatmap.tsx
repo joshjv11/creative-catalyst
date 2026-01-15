@@ -44,7 +44,7 @@ export const ClickHeatmap = () => {
 
   // Aggregate clicks by position
   const clickEvents = data.events.filter(e => e.type === 'click' && e.position);
-  const clickMap = new Map<string, number>();
+  const clickMap: Record<string, number> = {};
 
   clickEvents.forEach(event => {
     if (!event.position) return;
@@ -54,11 +54,11 @@ export const ClickHeatmap = () => {
     const x = Math.floor(event.position.x / 50) * 50;
     const y = Math.floor(event.position.y / 50) * 50;
     const key = `${x},${y}`;
-    clickMap.set(key, (clickMap.get(key) || 0) + 1);
+    clickMap[key] = (clickMap[key] || 0) + 1;
   });
 
   // Convert to array and find max for normalization
-  const clickData: ClickData[] = Array.from(clickMap.entries()).map(([key, count]) => {
+  const clickData: ClickData[] = Object.entries(clickMap).map(([key, count]) => {
     const [x, y] = key.split(',').map(Number);
     return { x, y, count };
   });

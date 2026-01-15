@@ -5,19 +5,23 @@ import { AboutSection } from "@/components/AboutSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
-import { ParallaxShapes } from "@/components/ParallaxEffects";
+import { FloatingElements } from "@/components/FloatingElements";
+import { GlowingCursor } from "@/components/GlowingCursor";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { SkillsEducationSection } from "@/components/SkillsEducationSection";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background relative">
+    <main className="min-h-screen bg-background relative overflow-x-hidden">
       {/* Analytics Tracking */}
       <AnalyticsTracker />
 
-      {/* Parallax Background */}
-      <ParallaxShapes />
+      {/* Custom Cursor */}
+      <GlowingCursor />
+
+      {/* Floating 3D Elements */}
+      <FloatingElements />
 
       {/* Main Content */}
       <Navigation />
