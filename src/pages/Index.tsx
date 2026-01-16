@@ -10,15 +10,36 @@ import { GlowingCursor } from "@/components/GlowingCursor";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { SkillsEducationSection } from "@/components/SkillsEducationSection";
+import { IronManParticleSystem } from "@/components/IronManParticleSystem";
+import { IronManHUD } from "@/components/IronManHUD";
+import { ArcReactorLoader } from "@/components/ArcReactorLoader";
+import { useState, useEffect } from "react";
 
 const Index = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Wait for boot sequence
+    const timer = setTimeout(() => setIsLoaded(true), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main className="min-h-screen bg-background relative overflow-x-hidden" style={{ perspective: 2000 }}>
+      {/* Boot Sequence Loader */}
+      {!isLoaded && <ArcReactorLoader />}
+
       {/* Analytics Tracking */}
       <AnalyticsTracker />
 
       {/* Custom Cursor */}
       <GlowingCursor />
+
+      {/* WebGL Particle System - Neural Network Effect */}
+      <IronManParticleSystem />
+
+      {/* Iron Man HUD Overlay */}
+      <IronManHUD />
 
       {/* Floating 3D Shapes - Cubes, Pyramids, Spheres */}
       <Floating3DShapes />
