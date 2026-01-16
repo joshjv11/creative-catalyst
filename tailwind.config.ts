@@ -62,6 +62,20 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Iron Man HUD Colors
+        hud: {
+          primary: "hsl(var(--hud-primary))",
+          secondary: "hsl(var(--hud-secondary))",
+          accent: "hsl(var(--hud-accent))",
+          glow: "hsl(var(--hud-glow))",
+        },
+        // Iron Man theme colors
+        iron: {
+          red: "hsl(0 85% 55%)",
+          gold: "hsl(40 100% 50%)",
+          cyan: "hsl(190 100% 50%)",
+          dark: "hsl(220 20% 8%)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

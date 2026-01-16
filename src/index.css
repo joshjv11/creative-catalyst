@@ -12,69 +12,79 @@
 
 @layer base {
   :root {
-    /* Core Dark Theme */
-    --background: 180 3% 13%;
-    --foreground: 60 6% 91%;
+    /* ===== IRON MAN INSPIRED THEME ===== */
     
-    /* Card surfaces - slightly elevated */
-    --card: 180 3% 16%;
-    --card-foreground: 60 6% 91%;
+    /* Core Dark Theme - Deep Tech Black */
+    --background: 220 20% 8%;
+    --foreground: 45 20% 95%;
+    
+    /* Card surfaces - Metallic dark */
+    --card: 220 15% 12%;
+    --card-foreground: 45 20% 95%;
     
     /* Popover */
-    --popover: 180 3% 14%;
-    --popover-foreground: 60 6% 91%;
+    --popover: 220 18% 10%;
+    --popover-foreground: 45 20% 95%;
     
-    /* Primary - Deep Teal/Ocean Blue */
-    --primary: 189 65% 30%;
-    --primary-foreground: 60 6% 96%;
-    --primary-glow: 189 65% 45%;
+    /* Primary - Arc Reactor Cyan */
+    --primary: 190 100% 50%;
+    --primary-foreground: 220 20% 8%;
+    --primary-glow: 190 100% 60%;
     
-    /* Secondary - Warm Cream */
-    --secondary: 60 17% 96%;
-    --secondary-foreground: 180 3% 13%;
+    /* Secondary - Iron Man Gold */
+    --secondary: 40 100% 50%;
+    --secondary-foreground: 220 20% 8%;
     
     /* Muted */
-    --muted: 180 3% 20%;
-    --muted-foreground: 180 1% 66%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 60%;
     
-    /* Accent */
-    --accent: 189 65% 30%;
-    --accent-foreground: 60 6% 96%;
+    /* Accent - Hot Red */
+    --accent: 0 85% 55%;
+    --accent-foreground: 45 20% 95%;
     
     /* Destructive */
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 60 6% 96%;
+    --destructive: 0 85% 50%;
+    --destructive-foreground: 45 20% 95%;
     
     /* Borders & Inputs */
-    --border: 180 3% 25%;
-    --input: 180 3% 20%;
-    --ring: 189 65% 45%;
+    --border: 190 30% 20%;
+    --input: 220 15% 15%;
+    --ring: 190 100% 50%;
     
-    --radius: 0.75rem;
+    --radius: 0.5rem;
     
-    /* Custom Design Tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(180 3% 13%) 0%, hsl(180 3% 10%) 50%, hsl(189 30% 10%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(180 3% 18%) 0%, hsl(180 3% 14%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(189 65% 30%) 0%, hsl(189 65% 40%) 100%);
-    --gradient-text: linear-gradient(135deg, hsl(60 6% 96%) 0%, hsl(189 65% 70%) 100%);
+    /* ===== IRON MAN HUD COLORS ===== */
+    --hud-primary: 190 100% 50%;
+    --hud-secondary: 40 100% 50%;
+    --hud-accent: 0 85% 55%;
+    --hud-glow: 190 100% 70%;
     
-    --shadow-glow: 0 0 60px hsl(189 65% 30% / 0.15);
-    --shadow-card: 0 10px 40px hsl(0 0% 0% / 0.3);
-    --shadow-elevated: 0 20px 60px hsl(0 0% 0% / 0.4);
+    /* Custom Design Tokens - Iron Man Style */
+    --gradient-hero: linear-gradient(135deg, hsl(220 20% 8%) 0%, hsl(220 25% 5%) 50%, hsl(220 20% 10%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(220 15% 14%) 0%, hsl(220 15% 10%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(190 100% 50%) 0%, hsl(190 100% 40%) 100%);
+    --gradient-text: linear-gradient(135deg, hsl(45 20% 95%) 0%, hsl(190 100% 70%) 100%);
+    --gradient-iron: linear-gradient(135deg, hsl(0 85% 55%) 0%, hsl(40 100% 50%) 100%);
+    
+    --shadow-glow: 0 0 60px hsl(190 100% 50% / 0.2);
+    --shadow-arc: 0 0 40px hsl(190 100% 60% / 0.4), 0 0 80px hsl(190 100% 50% / 0.2);
+    --shadow-card: 0 10px 40px hsl(0 0% 0% / 0.4);
+    --shadow-elevated: 0 20px 60px hsl(0 0% 0% / 0.5);
     
     /* Typography */
     --font-display: 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
     
-    /* Sidebar (keeping defaults) */
-    --sidebar-background: 180 3% 10%;
-    --sidebar-foreground: 60 6% 91%;
-    --sidebar-primary: 189 65% 30%;
-    --sidebar-primary-foreground: 60 6% 96%;
-    --sidebar-accent: 180 3% 18%;
-    --sidebar-accent-foreground: 60 6% 91%;
-    --sidebar-border: 180 3% 20%;
-    --sidebar-ring: 189 65% 45%;
+    /* Sidebar */
+    --sidebar-background: 220 20% 6%;
+    --sidebar-foreground: 45 20% 95%;
+    --sidebar-primary: 190 100% 50%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 45 20% 95%;
+    --sidebar-border: 190 30% 20%;
+    --sidebar-ring: 190 100% 50%;
   }
 }
 
@@ -178,5 +188,55 @@
 
   .animate-gradient {
     animation: gradient-shift 4s ease infinite;
+  }
+
+  /* Iron Man HUD Animations */
+  @keyframes hud-scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  @keyframes arc-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--hud-primary)/0.5), 
+                  0 0 40px hsl(var(--hud-primary)/0.3),
+                  inset 0 0 20px hsl(var(--hud-primary)/0.2);
+    }
+    50% { 
+      box-shadow: 0 0 40px hsl(var(--hud-primary)/0.8), 
+                  0 0 80px hsl(var(--hud-primary)/0.5),
+                  inset 0 0 40px hsl(var(--hud-primary)/0.4);
+    }
+  }
+
+  @keyframes data-stream {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 0% 100%; }
+  }
+
+  .animate-arc-pulse {
+    animation: arc-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-hud-scan {
+    animation: hud-scan 4s linear infinite;
+  }
+
+  .animate-data-stream {
+    animation: data-stream 2s linear infinite;
+  }
+
+  /* Text with HUD glow */
+  .text-hud-glow {
+    text-shadow: 0 0 10px hsl(var(--hud-primary)/0.8),
+                 0 0 20px hsl(var(--hud-primary)/0.5),
+                 0 0 40px hsl(var(--hud-primary)/0.3);
+  }
+
+  /* Iron Man style borders */
+  .border-hud {
+    border-color: hsl(var(--hud-primary)/0.5);
+    box-shadow: 0 0 10px hsl(var(--hud-primary)/0.2),
+                inset 0 0 10px hsl(var(--hud-primary)/0.1);
   }
 }

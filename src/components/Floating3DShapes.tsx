@@ -121,13 +121,13 @@ export const Floating3DShapes = () => {
         </div>
       </motion.div>
 
-      {/* Floating 3D Spheres with depth */}
+      {/* Floating 3D Spheres with depth - Iron Man Colors */}
       {[
-        { top: '25%', left: '75%', size: 60, delay: 0 },
-        { top: '55%', left: '85%', size: 40, delay: 0.5 },
-        { top: '70%', left: '5%', size: 50, delay: 1 },
-        { top: '35%', left: '15%', size: 35, delay: 1.5 },
-        { top: '80%', left: '45%', size: 45, delay: 2 },
+        { top: '25%', left: '75%', size: 60, delay: 0, color: '--hud-primary' },
+        { top: '55%', left: '85%', size: 40, delay: 0.5, color: '--hud-accent' },
+        { top: '70%', left: '5%', size: 50, delay: 1, color: '--hud-secondary' },
+        { top: '35%', left: '15%', size: 35, delay: 1.5, color: '--hud-primary' },
+        { top: '80%', left: '45%', size: 45, delay: 2, color: '--hud-accent' },
       ].map((sphere, index) => (
         <motion.div
           key={index}
@@ -147,8 +147,8 @@ export const Floating3DShapes = () => {
             style={{ 
               width: sphere.size, 
               height: sphere.size,
-              background: `radial-gradient(circle at 30% 30%, hsl(var(--primary)/0.3), hsl(var(--primary)/0.05) 60%, transparent)`,
-              boxShadow: `inset -10px -10px 30px hsl(var(--primary)/0.1), 0 0 40px hsl(var(--primary)/0.1)`,
+              background: `radial-gradient(circle at 30% 30%, hsl(var(${sphere.color})/0.4), hsl(var(${sphere.color})/0.1) 60%, transparent)`,
+              boxShadow: `inset -10px -10px 30px hsl(var(${sphere.color})/0.15), 0 0 40px hsl(var(${sphere.color})/0.15)`,
             }} 
           />
         </motion.div>
