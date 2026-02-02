@@ -3,7 +3,7 @@
     "id": "invoiceflow",
     "title": "InvoiceFlow",
     "description": "Production SaaS invoicing platform with secure authentication, multi-tenant architecture, and analytics-driven iterations. Built end-to-end and deployed for real users.",
-    "image": "",
+    "image": "/api/uploads/1770047245015-900985858-Screenshot 2026-02-02 at 9.16.20â¯PM.png",
     "websiteLink": "https://invoiceflow.dev/",
     "techStack": [
       "React",
@@ -12,7 +12,8 @@
       "MongoDB",
       "AWS"
     ],
-    "order": 0
+    "order": 0,
+    "updatedAt": 1770047251449
   },
   {
     "id": "sleepease",
@@ -33,7 +34,7 @@
     "id": "eldercare-companion",
     "title": "ElderCare Companion",
     "description": "Full-stack healthcare reminder system with automated WhatsApp reminders, real-time dashboard, multi-language support, OTP onboarding, and daily reports.",
-    "image": "",
+    "image": "/api/uploads/1770047072611-31837664-Screenshot 2026-02-02 at 9.14.04â¯PM.png",
     "websiteLink": "https://eldercare-companion-46k8.vercel.app/",
     "techStack": [
       "React",
@@ -42,7 +43,8 @@
       "WhatsApp Business API",
       "PostgreSQL"
     ],
-    "order": 2
+    "order": 2,
+    "updatedAt": 1770047077148
   },
   {
     "id": "aura-voice",
@@ -77,7 +79,7 @@
     "id": "riya-ai",
     "title": "Riya AI",
     "description": "AI-powered platform delivering intelligent experiences with a modern, responsive UI and production-ready architecture.",
-    "image": "",
+    "image": "/api/uploads/1770046955293-390756711-Screenshot 2026-02-02 at 9.12.26â¯PM.png",
     "websiteLink": "https://riya-ai.site/",
     "techStack": [
       "React",
@@ -85,19 +87,32 @@
       "AI/ML",
       "Node.js"
     ],
-    "order": 5
+    "order": 5,
+    "updatedAt": 1770046959765
   },
   {
     "id": "speakup",
     "title": "SpeakUp",
     "description": "AI-assisted spoken English learning platform with pronunciation feedback and interactive practice flows.",
-    "image": "",
+    "image": "/api/uploads/1770047000779-760184292-Screenshot 2026-02-02 at 9.13.07â¯PM.png",
     "websiteLink": "https://speakup-landing-1.emergent.host/",
     "techStack": [
       "React",
       "OpenAI API",
       "Speech Recognition"
     ],
-    "order": 6
+    "order": 6,
+    "updatedAt": 1770047006842
+  },
+  {
+    "id": "project-1770046680939-3ocjbvoxf",
+    "title": "QuantumBharat",
+    "description": "Learn quantum computing from India's leading researchers. Access world-class courses, groundbreaking research, and join a community shaping the future of technology.",
+    "image": "/api/uploads/1770046699488-630099604-Screenshot 2026-02-02 at 9.07.30â¯PM.png",
+    "websiteLink": "https://www.quantumbharat.com/",
+    "techStack": [],
+    "order": 7,
+    "createdAt": 1770046680939,
+    "updatedAt": 1770046708589
   }
 ]
