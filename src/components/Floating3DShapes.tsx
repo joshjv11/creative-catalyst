@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 export const Floating3DShapes = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const slowFactor = 200;
   const { scrollYProgress } = useScroll();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -136,8 +137,8 @@ export const Floating3DShapes = () => {
             rotateY: [0, 360],
           }}
           transition={{
-            y: { duration: 3 + index, repeat: Infinity, ease: "easeInOut", delay: sphere.delay },
-            rotateY: { duration: 10 + index * 2, repeat: Infinity, ease: "linear" },
+            y: { duration: (6 + index * 2) * slowFactor, repeat: Infinity, ease: "easeInOut", delay: sphere.delay },
+            rotateY: { duration: (20 + index * 4) * slowFactor, repeat: Infinity, ease: "linear" },
           }}
           className="absolute"
           style={{ top: sphere.top, left: sphere.left }}
@@ -147,8 +148,8 @@ export const Floating3DShapes = () => {
             style={{ 
               width: sphere.size, 
               height: sphere.size,
-              background: `radial-gradient(circle at 30% 30%, hsl(var(${sphere.color})/0.4), hsl(var(${sphere.color})/0.1) 60%, transparent)`,
-              boxShadow: `inset -10px -10px 30px hsl(var(${sphere.color})/0.15), 0 0 40px hsl(var(${sphere.color})/0.15)`,
+              background: `radial-gradient(circle at 30% 30%, hsl(var(${sphere.color})/0.08), hsl(var(${sphere.color})/0.02) 60%, transparent)`,
+              boxShadow: `inset -10px -10px 30px hsl(var(${sphere.color})/0.05), 0 0 40px hsl(var(${sphere.color})/0.05)`,
             }} 
           />
         </motion.div>
@@ -161,7 +162,7 @@ export const Floating3DShapes = () => {
           rotateX: useTransform(scrollYProgress, [0, 1], [60, 80]),
           rotateZ: useTransform(scrollYProgress, [0, 1], [0, 30]),
         }}
-        className="absolute top-[45%] right-[25%] opacity-30"
+        className="absolute top-[45%] right-[25%] opacity-10"
       >
         <svg width="200" height="200" viewBox="0 0 200 200" className="transform-gpu">
           <defs>

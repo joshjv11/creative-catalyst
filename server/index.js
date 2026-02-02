@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'JOsh'; // Change this in production
 const DATA_FILE = join(__dirname, 'data', 'analytics.json');
 const PROJECTS_FILE = join(__dirname, 'data', 'projects.json');

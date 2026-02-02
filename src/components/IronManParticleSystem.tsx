@@ -61,9 +61,9 @@ export const IronManParticleSystem = () => {
       positions[i3 + 2] = (Math.random() - 0.5) * 50;
 
       // Random velocities
-      velocities[i3] = (Math.random() - 0.5) * 0.02;
-      velocities[i3 + 1] = (Math.random() - 0.5) * 0.02;
-      velocities[i3 + 2] = (Math.random() - 0.5) * 0.01;
+      velocities[i3] = (Math.random() - 0.5) * 0.00005;
+      velocities[i3 + 1] = (Math.random() - 0.5) * 0.00005;
+      velocities[i3 + 2] = (Math.random() - 0.5) * 0.000025;
 
       // Random colors from palette
       const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
@@ -118,7 +118,7 @@ export const IronManParticleSystem = () => {
           gl_PointSize = size * (50.0 / -mvPosition.z);
           gl_PointSize *= (1.0 + mouseInfluence * 2.0);
           
-          vAlpha = 0.6 + mouseInfluence * 0.4;
+        vAlpha = 0.02 + mouseInfluence * 0.02;
         }
       `,
       fragmentShader: `
@@ -158,7 +158,7 @@ export const IronManParticleSystem = () => {
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0x00d4ff,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.01,
       blending: THREE.AdditiveBlending,
     });
     
@@ -169,7 +169,7 @@ export const IronManParticleSystem = () => {
     const animate = () => {
       frameRef.current = requestAnimationFrame(animate);
 
-      const time = performance.now() * 0.001;
+      const time = performance.now() * 0.000005;
       (material.uniforms.time as { value: number }).value = time;
       (material.uniforms.mousePosition as { value: THREE.Vector2 }).value.set(
         mouseRef.current.x,
@@ -273,7 +273,7 @@ export const IronManParticleSystem = () => {
     <div 
       ref={containerRef} 
       className="fixed inset-0 z-0 pointer-events-none"
-      style={{ background: 'transparent' }}
+      style={{ background: 'transparent', opacity: 0.05 }}
     />
   );
 };

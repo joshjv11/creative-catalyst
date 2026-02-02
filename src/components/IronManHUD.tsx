@@ -21,7 +21,7 @@ export const IronManHUD = () => {
         power: Math.max(95, Math.min(100, prev.power + (Math.random() - 0.5) * 2)),
         shields: Math.max(97, Math.min(100, prev.shields + (Math.random() - 0.5) * 1)),
       }));
-    }, 500);
+    }, 200000);
     return () => clearInterval(interval);
   }, []);
 
@@ -125,7 +125,7 @@ export const IronManHUD = () => {
           top: ["0%", "100%"],
         }}
         transition={{
-          duration: 4,
+          duration: 1600,
           repeat: Infinity,
           ease: "linear",
         }}
@@ -136,17 +136,17 @@ export const IronManHUD = () => {
         <motion.div
           className="absolute inset-0 rounded-full border border-hud-primary"
           animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 8000, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
           className="absolute inset-8 rounded-full border border-hud-primary opacity-60"
           animate={{ rotate: -360 }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 6000, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
           className="absolute inset-16 rounded-full border border-hud-accent opacity-40"
           animate={{ rotate: 360 }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 4000, repeat: Infinity, ease: "linear" }}
         />
         {/* Arc reactor segments */}
         {[...Array(8)].map((_, i) => (
@@ -158,7 +158,7 @@ export const IronManHUD = () => {
               opacity: 0.3 
             }}
             animate={{ opacity: [0.2, 0.5, 0.2] }}
-            transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+            transition={{ duration: 800, repeat: Infinity, delay: i * 0.2 }}
           />
         ))}
       </div>
@@ -175,7 +175,7 @@ export const IronManHUD = () => {
               scaleX: [1, 1.2, 1] 
             }}
             transition={{ 
-              duration: 1 + Math.random(),
+              duration: 400 + Math.random(),
               repeat: Infinity,
               delay: i * 0.1 
             }}
@@ -194,7 +194,7 @@ export const IronManHUD = () => {
               scaleX: [1, 1.2, 1] 
             }}
             transition={{ 
-              duration: 1 + Math.random(),
+              duration: 400 + Math.random(),
               repeat: Infinity,
               delay: i * 0.15 
             }}

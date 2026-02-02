@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 
 export const EnhancedHeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const slowFactor = 200;
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.85]);
@@ -58,7 +59,7 @@ export const EnhancedHeroSection = () => {
             rotateX: useTransform(mouseYSpring, [-0.5, 0.5], [2, -2]),
             rotateY: useTransform(mouseXSpring, [-0.5, 0.5], [-2, 2]),
           }}
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(189_65%_30%_/_0.2)_0%,_transparent_50%)]" 
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(189_65%_30%_/_0.05)_0%,_transparent_50%)]" 
         />
         
         {/* 3D Grid Floor Effect */}
@@ -71,11 +72,11 @@ export const EnhancedHeroSection = () => {
           className="absolute inset-x-0 top-0 h-[200%] origin-center"
         >
           <div 
-            className="w-full h-full opacity-20"
+            className="w-full h-full opacity-[0.08]"
             style={{
               backgroundImage: `
-                linear-gradient(hsl(var(--primary)/0.3) 1px, transparent 1px),
-                linear-gradient(90deg, hsl(var(--primary)/0.3) 1px, transparent 1px)
+                linear-gradient(hsl(var(--primary)/0.12) 1px, transparent 1px),
+                linear-gradient(90deg, hsl(var(--primary)/0.12) 1px, transparent 1px)
               `,
               backgroundSize: '60px 60px',
               maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
@@ -99,13 +100,21 @@ export const EnhancedHeroSection = () => {
               rotateZ: [0, 360],
             }}
             transition={{ 
-              scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-              rotateZ: { duration: 20, repeat: Infinity, ease: "linear" },
+              scale: { 
+                duration: 12 * slowFactor, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              },
+              rotateZ: { 
+                duration: 40 * slowFactor, 
+                repeat: Infinity, 
+                ease: "linear" 
+              },
             }}
             className="w-full h-full rounded-full"
             style={{
-              background: 'radial-gradient(circle at 30% 30%, hsl(var(--primary)/0.4), hsl(var(--primary)/0.1) 50%, transparent 70%)',
-              boxShadow: '0 0 100px hsl(var(--primary)/0.2), inset 0 0 60px hsl(var(--primary)/0.1)',
+              background: 'radial-gradient(circle at 30% 30%, hsl(var(--primary)/0.08), hsl(var(--primary)/0.02) 50%, transparent 70%)',
+              boxShadow: '0 0 100px hsl(var(--primary)/0.06), inset 0 0 60px hsl(var(--primary)/0.03)',
             }}
           />
         </motion.div>
@@ -125,13 +134,22 @@ export const EnhancedHeroSection = () => {
               rotateZ: [0, -360],
             }}
             transition={{ 
-              scale: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 },
-              rotateZ: { duration: 25, repeat: Infinity, ease: "linear" },
+              scale: { 
+                duration: 10 * slowFactor, 
+                repeat: Infinity, 
+                ease: "easeInOut", 
+                delay: 1 
+              },
+              rotateZ: { 
+                duration: 50 * slowFactor, 
+                repeat: Infinity, 
+                ease: "linear" 
+              },
             }}
             className="w-full h-full rounded-full"
             style={{
-              background: 'radial-gradient(circle at 70% 70%, hsl(var(--primary)/0.35), hsl(var(--primary)/0.08) 50%, transparent 70%)',
-              boxShadow: '0 0 80px hsl(var(--primary)/0.15)',
+              background: 'radial-gradient(circle at 70% 70%, hsl(var(--primary)/0.07), hsl(var(--primary)/0.02) 50%, transparent 70%)',
+              boxShadow: '0 0 80px hsl(var(--primary)/0.05)',
             }}
           />
         </motion.div>
@@ -152,16 +170,16 @@ export const EnhancedHeroSection = () => {
               rotateX: [-10, 10, -10],
             }}
             transition={{
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay },
-              rotateY: { duration: 8, repeat: Infinity, ease: "linear", delay },
-              rotateX: { duration: 5, repeat: Infinity, ease: "easeInOut", delay },
+              y: { duration: 8 * slowFactor, repeat: Infinity, ease: "easeInOut", delay },
+              rotateY: { duration: 16 * slowFactor, repeat: Infinity, ease: "linear", delay },
+              rotateX: { duration: 10 * slowFactor, repeat: Infinity, ease: "easeInOut", delay },
             }}
             className="absolute"
           >
             <div 
-              className="p-3 rounded-xl bg-primary/10 border border-primary/20 backdrop-blur-sm"
+              className="p-3 rounded-xl bg-primary/5 border border-primary/15 backdrop-blur-sm"
               style={{
-                boxShadow: '0 10px 40px hsl(var(--primary)/0.2)',
+                boxShadow: '0 10px 40px hsl(var(--primary)/0.08)',
               }}
             >
               <Icon size={size} className="text-primary" />
@@ -180,10 +198,10 @@ export const EnhancedHeroSection = () => {
           className="absolute top-[20%] right-[12%] w-20 h-20"
         >
           <div 
-            className="w-full h-full border-2 border-primary/30 rounded-xl bg-primary/5 backdrop-blur-sm"
+            className="w-full h-full border-2 border-primary/12 rounded-xl bg-primary/5 backdrop-blur-sm"
             style={{
               transform: 'rotateX(20deg) rotateY(20deg)',
-              boxShadow: '0 20px 40px hsl(var(--primary)/0.15)',
+              boxShadow: '0 20px 40px hsl(var(--primary)/0.06)',
             }}
           />
         </motion.div>
@@ -197,7 +215,7 @@ export const EnhancedHeroSection = () => {
           className="absolute bottom-[35%] left-[8%] w-16 h-16"
         >
           <div 
-            className="w-full h-full border border-primary/20 bg-gradient-to-br from-primary/15 to-transparent"
+            className="w-full h-full border border-primary/10 bg-gradient-to-br from-primary/6 to-transparent"
             style={{ transform: 'rotateX(30deg)' }}
           />
         </motion.div>
@@ -213,8 +231,8 @@ export const EnhancedHeroSection = () => {
         {/* Horizontal scanning line */}
         <motion.div
           animate={{ y: ["-100%", "200%"] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+          transition={{ duration: 16 * slowFactor, repeat: Infinity, ease: "linear" }}
+          className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/12 to-transparent"
         />
       </div>
 
@@ -239,7 +257,7 @@ export const EnhancedHeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 40, z: -50 }}
             animate={{ opacity: 1, y: 0, z: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, type: "spring" }}
+            transition={{ duration: 1.4, delay: 0.1, type: "spring" }}
             style={{ translateZ: 60 }}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/25 mb-8 backdrop-blur-md"
           >
@@ -248,7 +266,7 @@ export const EnhancedHeroSection = () => {
                 scale: [1, 1.4, 1],
                 boxShadow: ["0 0 0 0 hsl(var(--primary)/0.5)", "0 0 0 12px hsl(var(--primary)/0)", "0 0 0 0 hsl(var(--primary)/0.5)"]
               }}
-              transition={{ duration: 2, repeat: Infinity }}
+              transition={{ duration: 4 * slowFactor, repeat: Infinity }}
               className="w-2.5 h-2.5 rounded-full bg-primary"
             />
             <Sparkles className="w-4 h-4 text-primary" />
@@ -265,7 +283,7 @@ export const EnhancedHeroSection = () => {
             <motion.h1
               initial={{ opacity: 0, y: 60, rotateX: 40 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ duration: 0.9, delay: 0.25, type: "spring", damping: 18 }}
+            transition={{ duration: 1.8, delay: 0.25, type: "spring", damping: 18 }}
               style={{ translateZ: 80, transformStyle: "preserve-3d" }}
               className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95]"
             >
@@ -284,7 +302,7 @@ export const EnhancedHeroSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 40, rotateX: 30 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ duration: 0.9, delay: 0.45, type: "spring", damping: 18 }}
+            transition={{ duration: 1.8, delay: 0.45, type: "spring", damping: 18 }}
               style={{ translateZ: 60 }}
               className="mt-3"
             >
@@ -295,7 +313,7 @@ export const EnhancedHeroSection = () => {
                   backgroundSize: '200% 200%',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  animation: 'gradient-shift 4s ease infinite',
+                  animation: 'gradient-shift 8s ease infinite',
                 }}
               >
                 Software Engineer | Full-Stack & AI
@@ -307,7 +325,7 @@ export const EnhancedHeroSection = () => {
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
+            transition={{ duration: 1.4, delay: 0.6 }}
             style={{ translateZ: 40 }}
             className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed"
           >
@@ -319,7 +337,7 @@ export const EnhancedHeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 1.2, delay: 0.7 }}
             style={{ translateZ: 30 }}
             className="flex flex-wrap items-center justify-center gap-3 text-sm font-body text-muted-foreground mb-10"
           >
@@ -354,7 +372,7 @@ export const EnhancedHeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.9 }}
+            transition={{ duration: 1.4, delay: 0.9 }}
             style={{ translateZ: 50 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
@@ -373,12 +391,12 @@ export const EnhancedHeroSection = () => {
               <motion.span
                 className="absolute inset-0 bg-gradient-to-r from-primary-glow/0 via-white/20 to-primary-glow/0"
                 animate={{ x: ['-100%', '200%'] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
+                transition={{ duration: 5 * slowFactor, repeat: Infinity, ease: 'linear' }}
               />
               <span className="relative z-10">Start Exploring</span>
               <motion.span
                 animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+                transition={{ duration: 3 * slowFactor, repeat: Infinity }}
                 className="relative z-10"
               >
                 <ArrowDown className="w-4 h-4" />
@@ -405,20 +423,20 @@ export const EnhancedHeroSection = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 3 }}
         style={{ translateZ: 40 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
           animate={{ y: [0, 12, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          transition={{ duration: 4 * slowFactor, repeat: Infinity }}
           className="flex flex-col items-center gap-2 text-muted-foreground"
         >
           <span className="text-xs font-body tracking-widest uppercase">Scroll</span>
           <div className="w-7 h-11 border-2 border-muted-foreground/30 rounded-full flex justify-center p-2">
             <motion.div
               animate={{ y: [0, 14, 0], opacity: [1, 0.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              transition={{ duration: 4 * slowFactor, repeat: Infinity }}
               className="w-1.5 h-1.5 bg-primary rounded-full"
             />
           </div>

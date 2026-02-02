@@ -63,14 +63,15 @@
     "id": "prompt-to-power",
     "title": "Prompt to Power",
     "description": "Prompt-driven product experience that helps users turn ideas into structured outputs with a fast, clean interface and responsive UX.",
-    "image": "",
+    "image": "/api/uploads/1768594300148-167163377-Screenshot 2026-01-16 at 2.18.03â¯AM.png",
     "websiteLink": "https://prompt-to-power-dun.vercel.app/",
     "techStack": [
       "React",
       "Vite",
       "Tailwind CSS"
     ],
-    "order": 4
+    "order": 4,
+    "updatedAt": 1768594305656
   },
   {
     "id": "riya-ai",

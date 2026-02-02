@@ -5,14 +5,12 @@ import { AboutSection } from "@/components/AboutSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
-import { Floating3DShapes } from "@/components/Floating3DShapes";
-import { GlowingCursor } from "@/components/GlowingCursor";
+ 
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { SkillsEducationSection } from "@/components/SkillsEducationSection";
-import { IronManParticleSystem } from "@/components/IronManParticleSystem";
-import { IronManHUD } from "@/components/IronManHUD";
 import { ArcReactorLoader } from "@/components/ArcReactorLoader";
+import { ExitIntentModal } from "@/components/ExitIntentModal";
 import { useState, useEffect } from "react";
 
 const Index = () => {
@@ -32,18 +30,9 @@ const Index = () => {
       {/* Analytics Tracking */}
       <AnalyticsTracker />
 
-      {/* Custom Cursor */}
-      <GlowingCursor />
+      <ExitIntentModal />
 
-      {/* WebGL Particle System - Neural Network Effect */}
-      <IronManParticleSystem />
-
-      {/* Iron Man HUD Overlay */}
-      <IronManHUD />
-
-      {/* Floating 3D Shapes - Cubes, Pyramids, Spheres */}
-      <Floating3DShapes />
-
+ 
       {/* Main Content */}
       <Navigation />
       <EnhancedHeroSection />
