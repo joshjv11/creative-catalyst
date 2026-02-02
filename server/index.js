@@ -12,10 +12,14 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = 3001;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'JOsh'; // Change this in production
-const DATA_FILE = join(__dirname, 'data', 'analytics.json');
-const PROJECTS_FILE = join(__dirname, 'data', 'projects.json');
-const SITE_FILE = join(__dirname, 'data', 'site.json');
-const UPLOADS_DIR = join(__dirname, 'data', 'uploads');
+// On Vercel, try to find data relative to the project root or current working directory
+// In local dev, __dirname works. In Vercel, we need to be careful.
+// Vercel usually sets CWD to the project root.
+const DATA_DIR = join(process.cwd(), 'server', 'data');
+const DATA_FILE = join(DATA_DIR, 'analytics.json');
+const PROJECTS_FILE = join(DATA_DIR, 'projects.json');
+const SITE_FILE = join(DATA_DIR, 'site.json');
+const UPLOADS_DIR = join(DATA_DIR, 'uploads');
 const SESSIONS = new Map(); // In-memory session storage
 
 // Configure multer for file uploads
