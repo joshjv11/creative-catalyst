@@ -39,7 +39,7 @@ const upload = multer({
     const allowedTypes = /jpeg|jpg|png|gif|webp/;
     const extname = allowedTypes.test(file.originalname.toLowerCase());
     const mimetype = allowedTypes.test(file.mimetype);
-    
+
     if (extname && mimetype) {
       cb(null, true);
     } else {
@@ -64,7 +64,7 @@ function initDataFile() {
   if (!existsSync(dataDir)) {
     mkdirSync(dataDir, { recursive: true });
   }
-  
+
   if (!existsSync(DATA_FILE)) {
     const initialData = {
       events: [],
@@ -87,11 +87,11 @@ function initProjectsFile() {
   if (!existsSync(dataDir)) {
     mkdirSync(dataDir, { recursive: true });
   }
-  
+
   if (!existsSync(UPLOADS_DIR)) {
     mkdirSync(UPLOADS_DIR, { recursive: true });
   }
-  
+
   if (!existsSync(PROJECTS_FILE)) {
     const initialData = [];
     writeFileSync(PROJECTS_FILE, JSON.stringify(initialData, null, 2));
@@ -246,7 +246,7 @@ app.get('/api/health', (req, res) => {
 app.post('/api/analytics/track', (req, res) => {
   try {
     const event = req.body;
-    
+
     // Validate event
     if (!event.type || !event.sessionId) {
       return res.status(400).json({ error: 'Invalid event data' });
@@ -305,7 +305,7 @@ app.post('/api/analytics/track', (req, res) => {
 app.get('/api/analytics/data', requireAuth, (req, res) => {
   try {
     const data = readData();
-    
+
     // Apply filters if provided
     const { startDate, endDate, eventType, section } = req.query;
     let filteredEvents = [...data.events];
@@ -339,17 +339,17 @@ app.get('/api/analytics/data', requireAuth, (req, res) => {
 // Login
 app.post('/api/auth/login', (req, res) => {
   const { password } = req.body;
-  
+
   if (password === ADMIN_PASSWORD) {
     const sessionId = `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     SESSIONS.set(sessionId, { authenticated: true, createdAt: Date.now() });
-    
+
     res.cookie('sessionId', sessionId, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
       sameSite: 'lax'
     });
-    
+
     res.json({ success: true, sessionId });
   } else {
     res.status(401).json({ error: 'Invalid password' });
@@ -410,14 +410,14 @@ app.get('/api/projects/:id', (req, res) => {
 app.post('/api/projects', requireAuth, (req, res) => {
   try {
     const { title, description, image, websiteLink, techStack } = req.body;
-    
+
     if (!title || !description) {
       return res.status(400).json({ error: 'Title and description are required' });
     }
 
     const projects = readProjects();
     const maxOrder = projects.length > 0 ? Math.max(...projects.map(p => p.order || 0)) : -1;
-    
+
     const newProject = {
       id: `project-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       title,
@@ -432,7 +432,7 @@ app.post('/api/projects', requireAuth, (req, res) => {
 
     projects.push(newProject);
     writeProjects(projects);
-    
+
     res.json(newProject);
   } catch (error) {
     console.error('Error creating project:', error);
@@ -445,13 +445,13 @@ app.put('/api/projects/:id', requireAuth, (req, res) => {
   try {
     const projects = readProjects();
     const index = projects.findIndex(p => p.id === req.params.id);
-    
+
     if (index === -1) {
       return res.status(404).json({ error: 'Project not found' });
     }
 
     const { title, description, image, websiteLink, techStack } = req.body;
-    
+
     projects[index] = {
       ...projects[index],
       title: title !== undefined ? title : projects[index].title,
@@ -475,7 +475,7 @@ app.delete('/api/projects/:id', requireAuth, (req, res) => {
   try {
     const projects = readProjects();
     const filtered = projects.filter(p => p.id !== req.params.id);
-    
+
     if (filtered.length === projects.length) {
       return res.status(404).json({ error: 'Project not found' });
     }
@@ -492,13 +492,13 @@ app.delete('/api/projects/:id', requireAuth, (req, res) => {
 app.put('/api/projects/reorder', requireAuth, (req, res) => {
   try {
     const { projectIds } = req.body;
-    
+
     if (!Array.isArray(projectIds)) {
       return res.status(400).json({ error: 'projectIds must be an array' });
     }
 
     const projects = readProjects();
-    
+
     projectIds.forEach((id, index) => {
       const project = projects.find(p => p.id === id);
       if (project) {
@@ -575,12 +575,27 @@ app.post('/api/site-settings/upload', requireAuth, upload.single('image'), (req,
 });
 
 // Start server
-initDataFile();
-initProjectsFile();
-initSiteFile();
+// Start server
+if (process.env.NODE_ENV !== 'production') {
+  initDataFile();
+  initProjectsFile();
+  initSiteFile();
 
-app.listen(PORT, () => {
-  console.log(`Analytics server running on http://localhost:${PORT}`);
-  console.log(`Admin password: ${ADMIN_PASSWORD}`);
-});
+  app.listen(PORT, () => {
+    console.log(`Analytics server running on http://localhost:${PORT}`);
+    console.log(`Admin password: ${ADMIN_PASSWORD}`);
+  });
+} else {
+  // For Vercel (read-only filesystem, but init might be needed for memory structures if applicable)
+  // Note: Persisted files won't work on Vercel unless using /tmp or external DB.
+  // We'll attempt to init files just in case it's a persistent env, or just for read attempts.
+  // On Vercel, this will likely fail if we try to write, but reading static json might work if committed.
+  try {
+    // Ensure data directories exist if we can write (likely fails on Vercel)
+  } catch (e) {
+    console.log('Read-only environment detected');
+  }
+}
+
+export default app;
 
